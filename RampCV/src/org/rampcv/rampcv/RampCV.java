@@ -1,10 +1,13 @@
 package org.rampcv.rampcv;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 import org.rampcv.filters.ApplyColor;
 import org.rampcv.filters.Brighter;
 import org.rampcv.filters.GrayScale;
+
+import com.rampcv.color.ColorDetector;
 
 
 public class RampCV {
@@ -20,7 +23,13 @@ public class RampCV {
 	}
 	
 	public static ApplyColor applyColor(BufferedImage src) {
-		return new ApplyColor(src);
+		ApplyColor apcl = new ApplyColor(src);
+		return apcl;
+	}
+	
+	public static BufferedImage detectColor(BufferedImage src, Color detect) {
+		new ColorDetector(src, detect);
+		return src;
 	}
 	
 }
