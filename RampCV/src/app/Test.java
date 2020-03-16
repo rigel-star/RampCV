@@ -11,9 +11,11 @@ public class Test {
 
 	public static void main(String[] args) throws IOException {
 		
-		BufferedImage src = RampIO.read("C:\\Users\\Ramesh\\Desktop\\org.jpg");
+		BufferedImage src = RampIO.read("C:\\Users\\Ramesh\\Desktop\\fire.jpg");
 		
-		RampCV.detectColor(src, new Color(255,165,0));
+		Color col = new Color(190, 0, 0);
+		
+		RampCV.detectColor(src, col);
 		
 		RampIO.write(src, "jpg", "C:\\Users\\Ramesh\\Desktop\\out_img.jpg");
 	}

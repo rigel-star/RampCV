@@ -3,11 +3,10 @@ package org.rampcv.rampcv;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
+import org.rampcv.color.ColorDetector;
 import org.rampcv.filters.ApplyColor;
 import org.rampcv.filters.Brighter;
 import org.rampcv.filters.GrayScale;
-
-import com.rampcv.color.ColorDetector;
 
 
 public class RampCV {
