@@ -22,8 +22,8 @@ public class ApplyColor implements RampApplyColor{
 	
 	public ApplyColor(BufferedImage src) {
 		this.src = src;
-		h = src.getHeight();
-		w = src.getWidth();
+		this.h = src.getHeight();
+		this.w = src.getWidth();
 	}
 	
 	@Override
