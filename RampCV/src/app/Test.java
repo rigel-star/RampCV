@@ -2,7 +2,10 @@ package app;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import org.rampcv.image.RampIO;
 import org.rampcv.rampcv.RampCV;
@@ -11,13 +14,10 @@ public class Test {
 
 	public static void main(String[] args) throws IOException {
 		
-		BufferedImage src = RampIO.read("C:\\Users\\Ramesh\\Desktop\\fire.jpg");
+		BufferedImage img = ImageIO.read(new File("C:\\Users\\Ramesh\\Desktop\\opencv\\fruit.png"));
+		RampCV.detectBlob(img, new Color(0, 200, 0));
+		RampIO.write(img, "png", "C:\\Users\\Ramesh\\Desktop\\mack.png");
 		
-		Color col = new Color(190, 0, 0);
-		
-		RampCV.detectColor(src, col);
-		
-		RampIO.write(src, "jpg", "C:\\Users\\Ramesh\\Desktop\\out_img.jpg");
 	}
 
 }
