@@ -3,6 +3,8 @@ package org.rampcv.filters;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
+import org.rampcv.utils.Tools;
+
 public class GrayScale {
 	
 	public GrayScale(BufferedImage src) {
@@ -15,9 +17,13 @@ public class GrayScale {
 				
 				Color col = new Color(src.getRGB(x, y));
 				
-				int R = (int) (col.getRed() * 0.5);
-				int G = (int) (col.getGreen() * 0.3);
-				int B = (int) (col.getBlue() * 0.1);
+				int[] rgb = {
+						col.getRed(), col.getGreen(), col.getBlue()
+				};
+				
+				int R = Tools.getGray(rgb)[0];
+				int G = Tools.getGray(rgb)[1];
+				int B = Tools.getGray(rgb)[2];
 				
 				Color newCol = new Color(R+G+B, R+G+B, R+G+B);
 				

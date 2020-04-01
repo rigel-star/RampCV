@@ -6,10 +6,11 @@ import java.awt.image.BufferedImage;
 import org.rampcv.color.BlobDetector;
 import org.rampcv.color.InvertColor;
 import org.rampcv.filters.ApplyColor;
-import org.rampcv.filters.Brighter;
-import org.rampcv.filters.Flip;
+import org.rampcv.filters.Brightness;
+import org.rampcv.filters.Denoise;
 import org.rampcv.filters.GrayScale;
 import org.rampcv.filters.Pixelate;
+import org.rampcv.filters.Saturation;
 
 
 public class RampCV {
@@ -18,17 +19,14 @@ public class RampCV {
 		new GrayScale(src);
 		return src;
 	}
-	
-	public static BufferedImage brighter(BufferedImage src) {
-		new Brighter(src);
+	public static BufferedImage brighter(BufferedImage src, float intensity) {
+		new Brightness(src, intensity);
 		return src;
 	}
-	
 	public static ApplyColor applyColor(BufferedImage src) {
 		ApplyColor apcl = new ApplyColor(src);
 		return apcl;
 	}
-	
 	public static BufferedImage detectBlob(BufferedImage src, Color detect) {
 		new BlobDetector(src, detect);
 		return src;
@@ -37,10 +35,20 @@ public class RampCV {
 		new Pixelate(src, pixSize);
 		return src;
 	}
-	public static BufferedImage flip(BufferedImage img, boolean horizontal, boolean vertical) {
-		return new Flip(img, horizontal, vertical).getFinalImage();
+	public static BufferedImage invertColors(BufferedImage src, boolean red, boolean green, boolean blue) {
+		new InvertColor(src, red, green, blue);
+		return src;
 	}
-	public static BufferedImage invertColors(BufferedImage img, boolean red, boolean green, boolean blue) {
-		return new InvertColor(img, red, green, blue).getFinalImage();
+	public static BufferedImage invertColors(BufferedImage src) {
+		new InvertColor(src);
+		return src;
+	}
+	public static BufferedImage saturation(BufferedImage src, float intensity) {
+		new Saturation(src, intensity);
+		return src;
+	}
+	public static BufferedImage denoise(BufferedImage src, int iteration) {
+		new Denoise(src, iteration);
+		return src;
 	}
 }
