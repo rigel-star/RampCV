@@ -20,7 +20,7 @@ public class Tools {
 	}
 	
 	public static RampImage createBlankImageLike(RampImage img) {
-		RampImage out = new RampImage(img.getPixels());
+		RampImage out = new RampImage(img.width(), img.height()));
 		return out;
 	}
 	
