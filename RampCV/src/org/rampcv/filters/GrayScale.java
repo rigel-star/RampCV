@@ -21,11 +21,11 @@ public class GrayScale {
 						col.getRed(), col.getGreen(), col.getBlue()
 				};
 				
-				int R = Tools.getGray(rgb)[0];
-				int G = Tools.getGray(rgb)[1];
-				int B = Tools.getGray(rgb)[2];
+				rgb = Tools.getGray(rgb);
 				
-				Color newCol = new Color(R+G+B, R+G+B, R+G+B);
+				Color newCol = new Color(rgb[0]+rgb[1]+rgb[2],
+						rgb[0]+rgb[1]+rgb[2],
+						rgb[0]+rgb[1]+rgb[2]);
 				
 				src.setRGB(x, y, newCol.getRGB());
 				

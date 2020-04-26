@@ -10,6 +10,9 @@ public class Denoise {
 
 	public Denoise(BufferedImage img, int iteration) {
 		
+		if(iteration == 0)
+			return;
+		
 		for(int i=0;i<iteration;i++) {
 			
 			for(int x=1;x<img.getWidth()-1;x++) {

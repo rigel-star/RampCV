@@ -12,7 +12,6 @@ import org.rampcv.filters.GrayScale;
 import org.rampcv.filters.Pixelate;
 import org.rampcv.filters.Saturation;
 
-
 public class RampCV {
 
 	public static BufferedImage rgb2gray(BufferedImage src) {

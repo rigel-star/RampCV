@@ -1,24 +1,38 @@
 package org.rampcv.image;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
 public class RampIO {
-
-	public static BufferedImage read(String path) throws IOException {
-		BufferedImage img = ImageIO.read(new File(path));
-		return img;
+	
+	public static RampImage read(String path) {
+		RampImage rimg = null;
+		try {
+			ImageExtractor ext = new ImageExtractor(path);
+			rimg = new RampImage(ext.extractedImg());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return rimg;
 	}
 	
-	public static boolean write(BufferedImage renderedImg, String extn, String path) throws IOException {
+	/**RampImage: renderedImage
+	 * extn: eg. PNG, JPG
+	 * path: directory on your computer
+	 * */
+	public static boolean write(RampImage img, String extn, String path) {
 		
-		if(renderedImg == null || extn == null || path == null)
-			return false;
+		if(img == null || extn == null || path == null) {
+			throw new NullPointerException("Image, extn and path can't be null.");
+		}
 		
-		ImageIO.write(renderedImg, extn, new File(path));
+		try {
+			ImageIO.write(new ImageZipper(img).zippedImage(), "jpg", new File(path));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		return true;
 	}

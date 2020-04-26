@@ -29,11 +29,23 @@ public class Range {
 		return false;
 	}
 	
-	public static float constrain(float value, float min, float max) {
+	public static float constrain(float value, float min, float max) { //balance value between min and max
 		if(value < min)
 			value = min;
 		if(value > max)
 			value = max;
 		return value;
+	}
+	
+	static int[] constrain(int[] rgb) {		//balance rgb to not go over 255 and not go below 0.	
+		int[] out = new int[rgb.length];
+		for(int i=0; i<rgb.length; i++) {
+			if(rgb[i] > 255)
+				rgb[i] = 255;
+			if(rgb[i] < 0)
+				rgb[i] = 0;
+			out[i] = rgb[i];
+		}
+		return out;
 	}
 }

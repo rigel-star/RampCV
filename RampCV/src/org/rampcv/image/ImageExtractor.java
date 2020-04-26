@@ -35,6 +35,7 @@ public class ImageExtractor {
 		}
 	}
 	
+	
 	public int height() {
 		return this.height;
 	}
