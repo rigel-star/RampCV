@@ -8,10 +8,11 @@ import java.util.List;
 import org.rampcv.image.RampImage;
 
 public class Tools {
-
+	
+	
 	//creates the image like passed parameter, with same height, width and type
 	public static BufferedImage createBlankImageLike(BufferedImage img) {
-		return new BufferedImage(img.getWidth(),  img.getHeight(), BufferedImage.TYPE_INT_ARGB);
+		return createBlankImageLike(img, BufferedImage.TYPE_3BYTE_BGR);
 	}
 	
 	//creates bufferedimage with given type
@@ -20,13 +21,13 @@ public class Tools {
 	}
 	
 	public static RampImage createBlankImageLike(RampImage img) {
-		RampImage out = new RampImage(img.width(), img.height()));
+		RampImage out = new RampImage(img.width(), img.height());
 		return out;
 	}
 	
 	//creates image like the passed argument, same width, height and data.
 	public static BufferedImage copyImage(BufferedImage img) {
-		BufferedImage out = Tools.createBlankImageLike(img);
+		BufferedImage out = Tools.createBlankImageLike(img, img.getType());
 		for(int x=0; x<img.getWidth(); x++) {
 			for(int y=0; y<img.getHeight(); y++) {
 				out.setRGB(x, y, img.getRGB(x, y));

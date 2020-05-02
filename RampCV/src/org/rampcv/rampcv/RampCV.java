@@ -11,9 +11,16 @@ import org.rampcv.filters.Denoise;
 import org.rampcv.filters.GrayScale;
 import org.rampcv.filters.Pixelate;
 import org.rampcv.filters.Saturation;
+import org.rampcv.utils.Tools;
 
 public class RampCV {
 
+	
+	public static Tools utils() {
+		return new Tools();
+	}
+	
+	
 	public static BufferedImage rgb2gray(BufferedImage src) {
 		new GrayScale(src);
 		return src;

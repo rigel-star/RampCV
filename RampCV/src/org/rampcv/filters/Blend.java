@@ -9,17 +9,17 @@ public class Blend {
 
 	public class BlendMode {
 		
-		public static final int SCREEN = 1;
+		public static final int ADD = 1;
 	}
 	
 	private int mode;
-	BufferedImage i1, i2;
+	BufferedImage src, dest;
 	
-	public Blend(BufferedImage bg, BufferedImage fg, int blendMode) {
+	public Blend(BufferedImage src, BufferedImage dest, int blendMode) {
 		
 		mode = blendMode;
-		i1 = bg;
-		i2 = fg;
+		this.src = src;
+		this.dest = dest;
 		
 	}
 	
@@ -27,8 +27,8 @@ public class Blend {
 		
 		switch(mode) {
 		
-		case BlendMode.SCREEN:
-			return screen(i1, i2);
+		case BlendMode.ADD:
+			return blend_add(src, dest);
 		case 2:
 			return null;
 		}
@@ -36,36 +36,35 @@ public class Blend {
 		return null;
 	}
 	
-	private BufferedImage screen(BufferedImage i1, BufferedImage i2) {
-		var h = i1.getHeight();
-		var w = i1.getWidth();
+	private BufferedImage blend_add(BufferedImage src, BufferedImage dest) {
+		var h = dest.getHeight();
+		var w = dest.getWidth();
 		
 		var out = new BufferedImage(w, h, BufferedImage.TYPE_3BYTE_BGR);
 		
-		Color c1 = null, c2 = null;
+		Color srcColor = null, destColor = null, resultColor = null;
 		
 		for(int x=0; x<w; x++) {
 			for(int y=0; y<h; y++) {
 				
-				c1 = new Color(i1.getRGB(x, y));
-				c2 = new Color(i2.getRGB(x, y));
+				srcColor = new Color(src.getRGB(x, y));
+				destColor = new Color(dest.getRGB(x, y));
 				
-				int rgb = (int) Range.constrain(screen_mode_formula(c1.getRGB(), c2.getRGB()), 0, 255);
-				out.setRGB(x, y, rgb);
+				int[] rgb = {
+						srcColor.getRed() + destColor.getRed(),
+						srcColor.getGreen() + destColor.getGreen(),
+						destColor.getBlue() + destColor.getBlue(),
+						srcColor.getAlpha() + destColor.getAlpha()
+				};
+				
+				rgb = Range.constrain(rgb);
+				
+				resultColor = new Color(rgb[0], rgb[1], rgb[2]);
+				out.setRGB(x, y, resultColor.getRGB());
 			}
 		}
 		
 		return out;
 	}
-	
-	
-	
-	private int screen_mode_formula(int rgb1, int rgb2) {
-		int res = 255 - ((255 - rgb1) * (255 - rgb2));
-		return res;
-	}
-	
-	
-	
 	
 }
