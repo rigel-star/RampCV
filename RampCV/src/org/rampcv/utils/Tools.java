@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.rampcv.image.RampImage;
+import org.rampcv.math.BasicMath;
 
 public class Tools {
 	
@@ -15,15 +16,21 @@ public class Tools {
 		return createBlankImageLike(img, BufferedImage.TYPE_3BYTE_BGR);
 	}
 	
+	
+	
 	//creates bufferedimage with given type
 	public static BufferedImage createBlankImageLike(BufferedImage img, int type) {
 		return new BufferedImage(img.getWidth(),  img.getHeight(), type);
 	}
 	
+	
+	
 	public static RampImage createBlankImageLike(RampImage img) {
 		RampImage out = new RampImage(img.width(), img.height());
 		return out;
 	}
+	
+	
 	
 	//creates image like the passed argument, same width, height and data.
 	public static BufferedImage copyImage(BufferedImage img) {
@@ -35,6 +42,8 @@ public class Tools {
 		}
 		return out;
 	}
+	
+	
 	
 	//returns all the neighbors of particular pixel
 	public static List<Integer> getNeighbors(BufferedImage img, int x, int y){
@@ -48,17 +57,28 @@ public class Tools {
 		return list;
 	}
 	
+	
+	
 	//sets the passed rgb color on passed image
 	public static void setColor(BufferedImage img, float[] rgb, int x, int y) {
 		Color col = new Color((int) rgb[0], (int) rgb[1], (int) rgb[2]);
 		img.setRGB(x, y, col.getRGB());
 	}
 	
+	
+	public static void setColor(BufferedImage src, int rgb, int x, int y) {
+		src.setRGB(x, y, rgb);
+	}
+	
+	
+	
 	//returns the color of passed image pixel
 	public static float[] getColor(BufferedImage img, int x, int y) {
 		Color col = new Color(img.getRGB(x, y));
 		return new float[] {col.getRed(), col.getGreen(), col.getBlue()};
 	}
+	
+	
 	
 	//returns the grayscale value of given rgb
 	public static int[] getGray(int[] rgb) {
@@ -68,6 +88,8 @@ public class Tools {
 		
 		return new int[] {rgb[0], rgb[1], rgb[2]};
 	}
+	
+	
 	
 	//get gray format of RampImage
 	public static RampImage getGray(RampImage img) {
@@ -89,6 +111,8 @@ public class Tools {
 		return out;
 	}
 	
+	
+	
 	//converting given color from rgb to hsb
 	public static float[] RGBtoHSB(int r, int g, int b) {
 		float[] hsb = new float[3];
@@ -96,10 +120,32 @@ public class Tools {
 		return hsb;
 	}
 	
+	
+	
 	//converting given color from hsb to rgb
 	public static int HSBtoRGB(float h, float s, float b) {
 		return Color.HSBtoRGB(h, s, b);
 	}
+	
+	
+	
+	public static int mixColors(float t, int rgb1, int rgb2) {
+        int a1 = (rgb1 >> 24) & 0xff;
+        int r1 = (rgb1 >> 16) & 0xff;
+        int g1 = (rgb1 >> 8) & 0xff;
+        int b1 = rgb1 & 0xff;
+        int a2 = (rgb2 >> 24) & 0xff;
+        int r2 = (rgb2 >> 16) & 0xff;
+        int g2 = (rgb2 >> 8) & 0xff;
+        int b2 = rgb2 & 0xff;
+        a1 = (int) BasicMath.lerp(t, a1, a2);
+        r1 = (int) BasicMath.lerp(t, r1, r2);
+        g1 = (int) BasicMath.lerp(t, g1, g2);
+        b1 = (int) BasicMath.lerp(t, b1, b2);
+        return (a1 << 24) | (r1 << 16) | (g1 << 8) | b1;
+    }
+	
+	
 	
 	//averaging the pixels intensity
 	public static float average(List<Integer> list) {

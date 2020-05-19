@@ -1,5 +1,7 @@
 package org.rampcv.image;
 
+import java.awt.image.BufferedImage;
+
 public class RampImage {
 	
 	private float[][] pixels;
@@ -7,6 +9,7 @@ public class RampImage {
 	private int width;
 	
 	public RampImage() {}
+	
 	
 	//creates image with passed 2d array
 	public RampImage(float[][] pixs) {
@@ -18,16 +21,27 @@ public class RampImage {
 	//creates blank image with all values 0.
 	public RampImage(int w, int h) {
 		pixels = new float[w][h];
+	}
+	
+	
+	
+	public static int[] toIntArray(BufferedImage src) {
 		
-		this.height = h;
-		this.width = w;
+		var h = src.getHeight();
+		var w = src.getWidth();
+		
+		var outArr = new int[w*h];
 		
 		for(int x=0; x<w; x++) {
 			for(int y=0; y<h; y++) {
-				pixels[x][y] = 0;
+				var index = x + w * y;
+				outArr[index] = src.getRGB(x, y);
 			}
 		}
+		
+		return outArr;
 	}
+	
 	
 	public int height() {
 		return this.height;

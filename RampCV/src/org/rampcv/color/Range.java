@@ -37,7 +37,7 @@ public class Range {
 		return value;
 	}
 	
-	static int[] constrain(int[] rgb) {		//balance rgb to not go over 255 and not go below 0.	
+	public static int[] constrain(int[] rgb) {		//balance rgb to not go over 255 and not go below 0.	
 		int[] out = new int[rgb.length];
 		for(int i=0; i<rgb.length; i++) {
 			if(rgb[i] > 255)

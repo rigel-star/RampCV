@@ -6,8 +6,8 @@ import java.awt.image.BufferedImage;
 public class ApplyColor implements RampApplyColor{
 
 	private BufferedImage src;
-	private int col;
-	private Color color;
+	int col;
+	Color color;
 	private int h, w;
 	
 	public ApplyColor(BufferedImage src, int col) {

@@ -9,7 +9,7 @@ import org.rampcv.utils.Tools;
 public class Saturation {
 
 	public Saturation(BufferedImage img, float intensity) {
-		intensity = Range.constrain(intensity, 0.0f, 10.0f);
+		intensity = Range.constrain(intensity, 0.0f, 1.0f);
 		
 		if(intensity == 0)
 			return;
@@ -25,4 +25,28 @@ public class Saturation {
 			}
 		}
 	}
+	
+	
+	public static int incSaturation(BufferedImage src, int x, int y, float intensity) {
+		
+		float[] hsb;
+		Color color;
+		
+		if(intensity <= 0) {
+			return src.getRGB(x, y);
+		}
+		
+		color = new Color(src.getRGB(x, y));
+		int r = color.getRed();
+		int g = color.getGreen();
+		int b = color.getBlue();
+		
+		hsb = Tools.RGBtoHSB(r, g, b);
+		
+		hsb[1] = Range.constrain(hsb[1] * intensity, 0.0f, 1.0f);
+		
+		return (int) hsb[1];
+	}
+	
+	
 }

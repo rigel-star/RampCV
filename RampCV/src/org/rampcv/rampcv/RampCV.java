@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import org.rampcv.color.BlobDetector;
 import org.rampcv.color.InvertColor;
 import org.rampcv.filters.ApplyColor;
+import org.rampcv.filters.Blend;
 import org.rampcv.filters.Brightness;
 import org.rampcv.filters.Denoise;
 import org.rampcv.filters.GrayScale;
@@ -41,11 +42,11 @@ public class RampCV {
 		new Pixelate(src, pixSize);
 		return src;
 	}
-	public static BufferedImage invertColors(BufferedImage src, boolean red, boolean green, boolean blue) {
+	public static BufferedImage invert(BufferedImage src, boolean red, boolean green, boolean blue) {
 		new InvertColor(src, red, green, blue);
 		return src;
 	}
-	public static BufferedImage invertColors(BufferedImage src) {
+	public static BufferedImage invert(BufferedImage src) {
 		new InvertColor(src);
 		return src;
 	}
@@ -57,4 +58,10 @@ public class RampCV {
 		new Denoise(src, iteration);
 		return src;
 	}
+	public static BufferedImage blend(BufferedImage background, BufferedImage overlay, int blendMode) {
+		return new Blend(background, overlay, blendMode).apply();
+	}
+	
+	
+	
 }
